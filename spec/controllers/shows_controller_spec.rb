@@ -105,18 +105,20 @@ describe ShowsController do
       @show.reload
       @show.name.should == "Family Guy2"
       @show.picture.should == "http://something.com/pic.png2"
-      @show.episode_duration == '42 min'
-      @show.genre == "Comedy2"
-      @show.started_year = "2009"
+      @show.episode_duration.should == '42 min'
+      @show.genre.should == "Comedy2"
+      @show.started_year.should == 2009
     end
 
     describe "when passing invalid input" do
       it "should not update a show" do
         lambda do
-          put :update, :id => @show.id, :show => {:name => "Family Guy"}
-        end.should_not change(Show, :count)
+          put :update, :id => @show.id, :show => {:name => "Family Guy2", :picture => ''}
+        end
 
-        response.should_not be_success
+        response.should_not be_redirect
+        @show.reload
+        @show.name.should == "Family Guy"
       end
     end
   end
