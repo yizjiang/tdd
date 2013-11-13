@@ -6,6 +6,11 @@ describe Show do
 
   it "should be valid" do
     show = Show.new
+    show.should respond_to :name
+    show.should respond_to :picture
+    show.should respond_to :episode_duration
+    show.should respond_to :genre
+    show.should respond_to :started_year
     show.valid?
   end
 end
